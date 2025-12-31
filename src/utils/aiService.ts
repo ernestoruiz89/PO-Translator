@@ -90,7 +90,7 @@ async function callOpenAI(prompt: string, apiKey: string): Promise<string[]> {
                 { role: 'user', content: prompt },
             ],
             temperature: 0.7,
-            max_tokens: 200,
+            max_completion_tokens: 200,
         }),
     });
 
