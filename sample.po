@@ -1,0 +1,41 @@
+# Sample Translation File
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: es\n"
+
+#. Button label for form submission
+msgid "Submit"
+msgstr ""
+
+#. Page title for dashboard
+msgid "Dashboard"
+msgstr ""
+
+#. Welcome message shown to new users
+msgid "Welcome to our application"
+msgstr "Bienvenido a nuestra aplicación"
+
+#. Error message when login fails
+msgid "Invalid username or password"
+msgstr ""
+
+#. Navigation menu item
+msgid "Settings"
+msgstr "Configuración"
+
+#. Placeholder text for search input
+msgid "Search..."
+msgstr ""
+
+#. Confirmation dialog title
+msgid "Are you sure?"
+msgstr "¿Estás seguro?"
+
+#. Cancel button text
+msgid "Cancel"
+msgstr ""
+
+#. Save button text
+msgid "Save changes"
+msgstr ""
