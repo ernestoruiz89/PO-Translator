@@ -16,6 +16,10 @@
   padding: var(--space-md) var(--space-xl);
 }
 
+.light .header {
+  background: rgba(248, 250, 252, 0.8);
+}
+
 .header-content {
   max-width: 1400px;
   margin: 0 auto;
@@ -148,6 +152,14 @@
   background: linear-gradient(90deg, var(--accent-primary), var(--success));
   border-radius: 4px;
   transition: width var(--transition-slow);
+}
+
+.progress-percent {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  min-width: 45px;
+  text-align: right;
 }
 
 /* ===== Filter Bar ===== */

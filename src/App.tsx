@@ -5,6 +5,7 @@ import type { TranslationEntry, ParsedPO } from './utils/poParser';
 import { loadSettings, saveSettings, getAISuggestions, type AISettings, type AIProvider } from './utils/aiService';
 
 type FilterType = 'all' | 'pending' | 'translated';
+type Theme = 'dark' | 'light';
 
 function App() {
   const [poData, setPoData] = useState<ParsedPO | null>(null);
@@ -17,11 +18,28 @@ function App() {
   const [showSettings, setShowSettings] = useState(false);
   const [aiSettings, setAiSettings] = useState<AISettings>(loadSettings);
   const [error, setError] = useState<string | null>(null);
+  const [theme, setTheme] = useState<Theme>(() => {
+    const saved = localStorage.getItem('po-translator-theme');
+    return (saved as Theme) || 'dark';
+  });
+
+  // Apply theme to body
+  useEffect(() => {
+    document.body.classList.remove('light', 'dark');
+    if (theme === 'light') {
+      document.body.classList.add('light');
+    }
+    localStorage.setItem('po-translator-theme', theme);
+  }, [theme]);
 
   // Save settings when they change
   useEffect(() => {
     saveSettings(aiSettings);
   }, [aiSettings]);
+
+  const toggleTheme = useCallback(() => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  }, []);
 
   const handleFileUpload = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -253,6 +271,25 @@ function App() {
             <span>PO Translator</span>
           </div>
           <div className="header-actions">
+            <button className="btn btn-ghost" onClick={toggleTheme} title={theme === 'dark' ? 'Light mode' : 'Dark mode'}>
+              {theme === 'dark' ? (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="5" />
+                  <line x1="12" y1="1" x2="12" y2="3" />
+                  <line x1="12" y1="21" x2="12" y2="23" />
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                  <line x1="1" y1="12" x2="3" y2="12" />
+                  <line x1="21" y1="12" x2="23" y2="12" />
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                </svg>
+              ) : (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                </svg>
+              )}
+            </button>
             <button className="btn btn-ghost" onClick={() => setShowSettings(true)} title="AI Settings">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="3" />
@@ -323,6 +360,9 @@ function App() {
                   style={{ width: `${stats.total ? (stats.translated / stats.total) * 100 : 0}%` }}
                 />
               </div>
+              <span className="progress-percent">
+                {stats.total ? Math.round((stats.translated / stats.total) * 100) : 0}%
+              </span>
             </div>
 
             {/* Filter Bar */}
@@ -380,16 +420,16 @@ function App() {
               <div className="detail-panel glass">
                 {selectedEntry ? (
                   <>
-                    <div className="detail-section">
-                      <label>Source (msgid)</label>
-                      <div className="source-text">{selectedEntry.msgid}</div>
-                    </div>
                     {selectedEntry.comments && (
                       <div className="detail-section">
                         <label>Context</label>
                         <div className="context-text">{selectedEntry.comments}</div>
                       </div>
                     )}
+                    <div className="detail-section">
+                      <label>Source (msgid)</label>
+                      <div className="source-text">{selectedEntry.msgid}</div>
+                    </div>
                     <div className="detail-section">
                       <label>Translation (msgstr)</label>
                       <textarea
