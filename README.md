@@ -11,6 +11,9 @@ A modern web application for translating `.po` (Gettext) files with AI-powered s
 - **💾 Export** - Download your translated `.po` file when ready
 - **🌙 Modern UI** - Clean, glassmorphism-inspired interface
 
+<img width="1389" height="907" alt="image" src="https://github.com/user-attachments/assets/f283743b-89d8-4e3c-ad77-93035ef9b2e7" />
+
+
 ## 🚀 Getting Started
 
 ### Prerequisites
