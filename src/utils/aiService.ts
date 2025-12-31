@@ -81,7 +81,7 @@ async function callOpenAI(prompt: string, apiKey: string): Promise<string[]> {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            model: 'gpt-5-mini',
+            model: 'gpt-4o-mini',
             messages: [
                 {
                     role: 'system',
@@ -90,7 +90,7 @@ async function callOpenAI(prompt: string, apiKey: string): Promise<string[]> {
                 { role: 'user', content: prompt },
             ],
             temperature: 0.7,
-            max_completion_tokens: 200,
+            max_tokens: 200,
         }),
     });
 

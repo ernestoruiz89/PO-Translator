@@ -68,7 +68,7 @@ npm run build
 
 - **React 19** + TypeScript
 - **Vite** - Fast build tool
-- **OpenAI API** - GPT-5 mini for translations
+- **OpenAI API** - GPT-4o mini for translations
 - **Google Gemini API** - Gemini 2.5 Flash for translations
 
 ## 📝 License
